@@ -13,6 +13,8 @@ module.exports = function (app) {
 
   app.post('/agency/add', requireAuth, agencyCtrl.addAgency)
   app.get('/agency/list', requireAuth, agencyCtrl.getAgencyList)
+  app.post('/agency/update/:id', requireAuth, agencyCtrl.updateAgency)
+  app.delete('/agency/delete/:id', requireAuth, agencyCtrl.deleteAgency)
 
   app.post('/office/add', requireAuth, officeCtrl.addOffice)
   app.get('/office/list', requireAuth, officeCtrl.getOfficeList)
