@@ -31,7 +31,6 @@ function updateAgency (req, res, next) {
 }
 
 function deleteAgency (req, res, next) {
-  console.log('=======> ', req.params.id)
   Agency.remove({ _id: req.params.id }, (err) => {
     if (err) { return next(err) }
     return getAgencyList(req, res, next)

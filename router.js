@@ -18,6 +18,8 @@ module.exports = function (app) {
 
   app.post('/office/add', requireAuth, officeCtrl.addOffice)
   app.get('/office/list', requireAuth, officeCtrl.getOfficeList)
+  app.post('/office/update/:id', requireAuth, officeCtrl.updateOffice)
+  app.delete('/office/delete/:id', requireAuth, officeCtrl.deleteOffice)
 
   // requireSignin verifies email/pwd. Authentication.genUserTokenOnSignin creates a token
   // app.post('/signin', doSignin, Authentication.genUserTokenOnSignin)
