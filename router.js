@@ -3,6 +3,7 @@ const Authentication = require('./controllers/authentication')
 const passportService = require('./services/passport')
 const agencyCtrl = require('./controllers/agency')
 const officeCtrl = require('./controllers/office')
+const inwardCtrl = require('./controllers/inward')
 
 const requireAuth = passport.authenticate('jwt', { session: false }) // for authenticated routes
 
@@ -20,6 +21,11 @@ module.exports = function (app) {
   app.get('/office/list', requireAuth, officeCtrl.getOfficeList)
   app.post('/office/update/:id', requireAuth, officeCtrl.updateOffice)
   app.delete('/office/delete/:id', requireAuth, officeCtrl.deleteOffice)
+
+  app.post('/inward/add', requireAuth, inwardCtrl.addInward)
+
+  app.get('/inward/view-by-agencies', requireAuth, inwardCtrl.viewByAgencies)
+  app.get('/inward/view-by-offices', requireAuth, inwardCtrl.viewByOffices)
 
   // requireSignin verifies email/pwd. Authentication.genUserTokenOnSignin creates a token
   // app.post('/signin', doSignin, Authentication.genUserTokenOnSignin)
