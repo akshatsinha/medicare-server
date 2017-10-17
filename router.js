@@ -23,7 +23,7 @@ module.exports = function (app) {
   app.delete('/office/delete/:id', requireAuth, officeCtrl.deleteOffice)
 
   app.post('/inward/add', requireAuth, inwardCtrl.addInward)
-
+  app.post('/inward/update/:id', requireAuth, inwardCtrl.updateInward)
   app.get('/inward/view-by-agencies', requireAuth, inwardCtrl.viewByAgencies)
   app.get('/inward/view-by-offices', requireAuth, inwardCtrl.viewByOffices)
 

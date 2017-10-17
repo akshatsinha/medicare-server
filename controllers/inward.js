@@ -12,6 +12,7 @@ function addInward (req, res, next) {
 }
 
 function viewByAgencies (req, res, next) {
+  console.log('==== viewByAgencies')
   Inward.find({}, (err, inwards) => {
     let bill_rcd_period = {}
     let resp = []
@@ -67,8 +68,30 @@ function viewByOffices (req, res, next) {
   })
 }
 
+function updateInward (req, res, next) {
+  const { bill_amt, bill_dt, bill_no, bill_pd_amt, bill_pd_dt, bill_rcd_dt, dd_agency_id, dd_office_id } = req.body.inwardObj
+  const { src } = req.body.src
+  Inward.findById(req.params.id, (err, inward) => {
+    if (err) { return next(err) }
+    inward.bill_amt = bill_amt
+    inward.bill_dt = bill_dt
+    inward.bill_no = bill_no
+    inward.bill_pd_amt = bill_pd_amt
+    inward.bill_pd_dt = bill_pd_dt
+    inward.bill_rcd_dt = bill_rcd_dt
+    inward.dd_agency_id = dd_agency_id
+    inward.dd_office_id = dd_office_id
+    inward.save((err, updatedInward) => {
+      if (err) { return next(err) }
+      if (req.body.src === 'agency') return viewByAgencies(req, res, next)
+      else if (req.body.src === 'office') return viewByOffices(req, res, next)
+    })
+  })
+}
+
 module.exports = {
   addInward,
   viewByAgencies,
-  viewByOffices
+  viewByOffices,
+  updateInward
 }
